@@ -1,13 +1,13 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+start.disabled = true;
 let selectedDate;
 const daysValue = document.querySelector('[data-days]');
 const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
 const secondsValue = document.querySelector('[data-seconds]');
 const start = document.querySelector('[data-start]');
-start.disabled = true;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -22,9 +22,14 @@ const options = {
     }
   },
 };
+
+
+
 function addLeadingZero(value) {
   return String(value).padStart(2, 0);
 }
+
+
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -37,13 +42,14 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+
 function onTimerStart() {
   start.disabled = true;
   selectedDate = fp.selectedDates[0];
-  timerId = setInterval(() => {
+  const timerId = setInterval(() => {
     const currentDate = new Date();
     const countdown = selectedDate - currentDate;
-
     if (countdown < 0) {
       clearInterval(timerId);
       return;
@@ -51,12 +57,15 @@ function onTimerStart() {
     updateTimer(convertMs(countdown));
   }, 1000);
 }
+
+
 function updateTimer({ days, hours, minutes, seconds }) {
   daysValue.textContent = addLeadingZero(days);
   hoursValue.textContent = addLeadingZero(hours);
   minutesValue.textContent = addLeadingZero(minutes);
   secondsValue.textContent = addLeadingZero(seconds);
 }
-start.addEventListener('click', onTimerStart);
 
+
+start.addEventListener('click', onTimerStart);
 const fp = flatpickr('#datetime-picker', options);
