@@ -1,13 +1,13 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-start.disabled = true;
 let selectedDate;
 const daysValue = document.querySelector('[data-days]');
 const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
 const secondsValue = document.querySelector('[data-seconds]');
 const start = document.querySelector('[data-start]');
+start.disabled = true;
 const options = {
   enableTime: true,
   time_24hr: true,
